@@ -1,6 +1,7 @@
 # galahad
 
 [![Build Status](https://travis-ci.org/ImageIntelligence/galahad.svg?branch=master)](https://travis-ci.org/ImageIntelligence/galahad)<Paste>
+[ ![Download](https://api.bintray.com/packages/imageintelligence/maven/galahad-core/images/download.svg) ](https://bintray.com/imageintelligence/maven/galahad-core/_latestVersion)
 
 A collection of utilities to help make working with Scala easier.
 
