@@ -4,7 +4,6 @@ lazy val commonSettings = Seq(
   organization := "com.ii",
   scalaVersion := "2.11.8",
   resolvers := Depend.depResolvers,
-  version := Try(sys.env("LIB_VERSION")).getOrElse("0.0.1"),
   licenses += ("MIT", url("http://opensource.org/licenses/MIT")),
   bintrayOrganization := Some("imageintelligence"),
   scalacOptions ++= Seq(
@@ -31,7 +30,7 @@ lazy val core = Project(
   base = file("core"),
   settings = commonSettings ++ Seq (
     name := "galahad-core",
-    version := "0.0.1",
+    version := Try(sys.env("LIB_VERSION")).getOrElse("0.0.1"),
     libraryDependencies :=
       Depend.scalaz ++
       Depend.scalaTestCheck
@@ -43,7 +42,7 @@ lazy val argonaut = Project(
   base = file("argonaut"),
   settings = commonSettings ++ Seq(
     name := "galahad-argonaut",
-    version := "0.0.1",
+    version := Try(sys.env("LIB_VERSION")).getOrElse("0.0.1"),
     libraryDependencies :=
       Depend.scalaz ++
       Depend.argonaut ++
