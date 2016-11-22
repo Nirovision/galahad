@@ -1,0 +1,16 @@
+language: scala
+scala:
+- 2.11.8
+
+env:
+  global:
+  - LIB_VERSION=$TRAVIS_TAG
+
+deploy:
+  provider: script
+  script: project/publish.sh
+  env:
+  on:
+    tags: true
+
+script: sbt compile
