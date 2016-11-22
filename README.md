@@ -39,3 +39,6 @@ sbt test
 ```
 
 ### Project Structure
+
+This is a multi module project
+
