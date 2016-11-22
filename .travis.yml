@@ -13,4 +13,6 @@ deploy:
   on:
     tags: true
 
-script: sbt compile
+script: 
+  - env
+  - sbt compile
