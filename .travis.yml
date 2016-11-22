@@ -14,5 +14,4 @@ deploy:
     tags: true
 
 script: 
-  - env
   - sbt compile
