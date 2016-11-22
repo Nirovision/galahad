@@ -51,4 +51,4 @@ lazy val argonaut = Project(
   )
 ).dependsOn(core % "test->test;compile->compile")
 
-lazy val root = (project in file(".")).aggregate(core, argonaut)
+lazy val root = (project in file(".")).settings (publish := { }).aggregate(core, argonaut)
