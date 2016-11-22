@@ -38,3 +38,4 @@ Test
 sbt test
 ```
 
+### Project Structure
