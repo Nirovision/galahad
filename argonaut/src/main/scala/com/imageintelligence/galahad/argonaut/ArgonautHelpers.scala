@@ -1,4 +1,4 @@
-package com.ii.galahad.argonaut
+package com.imageintelligence.galahad.argonaut
 
 import java.net.URL
 

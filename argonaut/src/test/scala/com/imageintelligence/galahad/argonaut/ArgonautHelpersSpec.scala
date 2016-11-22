@@ -1,12 +1,13 @@
-package com.ii.galahad.argonaut
+package com.imageintelligence.galahad.argonaut
 
 import java.net.URL
 import java.util.UUID
 
 import argonaut._
 import org.scalacheck._
-import com.ii.galahad.argonaut.ArgonautHelpers._
-import com.ii.galahad.core.Generators._
+import ArgonautHelpers._
+import Generators._
+import com.imageintelligence.galahad.core.Generators
 import org.scalatest.PropSpec
 import org.scalatest.prop.Checkers
 

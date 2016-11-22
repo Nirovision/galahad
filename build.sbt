@@ -1,7 +1,7 @@
 import scala.util.Try
 
 lazy val commonSettings = Seq(
-  organization := "com.ii",
+  organization := "com.imageintelligence",
   scalaVersion := "2.11.8",
   resolvers := Depend.depResolvers,
   licenses += ("MIT", url("http://opensource.org/licenses/MIT")),

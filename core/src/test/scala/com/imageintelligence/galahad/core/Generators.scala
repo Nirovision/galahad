@@ -1,4 +1,5 @@
-package com.ii.galahad.core
+package com.imageintelligence.galahad.core
+
 import java.net.URL
 import java.util.UUID
 import java.util.concurrent.TimeUnit
