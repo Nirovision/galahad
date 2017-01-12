@@ -30,6 +30,4 @@ object Generators {
   implicit val arbURL: Arbitrary[URL] = Arbitrary(genURL)
   implicit val arbDuration: Arbitrary[Duration] = Arbitrary(genDuration)
   implicit val arbUUID: Arbitrary[UUID] = Arbitrary(Gen.uuid)
-
-
 }
