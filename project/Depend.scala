@@ -1,15 +1,13 @@
 import sbt._
 
 object Depend {
-  lazy val scalazVersion = "7.1.7"
+  lazy val scalazVersion = "7.2.6"
 
   lazy val scalaz = Seq(
     "org.scalaz" %% "scalaz-core"
   ).map(_ % scalazVersion)
 
-  lazy val kindProjectors = Seq("org.spire-math" %% "kind-projector" % "0.8.1")
-
-  lazy val argonaut = Seq("io.argonaut" %% "argonaut" % "6.1")
+  lazy val argonaut = Seq("io.argonaut" %% "argonaut" % "6.2-RC2")
 
   lazy val scalaTestCheck = Seq(
     "org.scalatest"   %% "scalatest"                 % "2.2.4",

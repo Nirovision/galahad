@@ -6,8 +6,7 @@ import java.util.UUID
 import argonaut._
 import org.scalacheck._
 import ArgonautHelpers._
-import Generators._
-import com.imageintelligence.galahad.core.Generators
+import com.imageintelligence.galahad.core.Generators._
 import org.scalatest.PropSpec
 import org.scalatest.prop.Checkers
 

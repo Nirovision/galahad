@@ -11,8 +11,12 @@ import scalaz._, Scalaz._
 
 object ArgonautHelpers {
 
+  def fromFoldable[F[_], A](implicit A: EncodeJson[A], F: Foldable[F]): EncodeJson[F[A]] =
+    EncodeJson(fa => jArray(F.foldLeft(fa, Nil: List[Json])((list, a) => A.encode(a) :: list).reverse))
+
+
   def eitherDecoder[A, B](history: CursorHistory, f: A => String \/ B): A => DecodeResult[B] = {
-    f(_).fold(x => DecodeResult.fail[B](x, history), _.pure[DecodeResult])
+    f(_).fold(x => DecodeResult.fail[B](x, history), x => DecodeResult.ok(x))
   }
 
   implicit def URLCodecJson: CodecJson[URL] =
@@ -34,11 +38,23 @@ object ArgonautHelpers {
     )
 
 
-  implicit def DurationEncodeJson : CodecJson[Duration] = {
+  implicit def DurationCodecJson: CodecJson[Duration] = {
     CodecJson(
       i => i.toMillis.asJson,
       i => i.as[Long].map(Duration.create(_, TimeUnit.MILLISECONDS))
     )
   }
+
+  implicit def NonEmptyListDecodeJson[A: DecodeJson]: DecodeJson[NonEmptyList[A]] = {
+    implicitly[DecodeJson[List[A]]].flatMap(l =>
+      DecodeJson[NonEmptyList[A]](c => std.list.toNel(l) match {
+        case None => DecodeResult.fail("[A]NonEmptyList[A]", c.history)
+        case Some(n) => DecodeResult.ok(n)
+      })
+    ) setName "[A]NonEmptyList[A]"
+  }
+
+  implicit def NonEmptyListEncodeJson[A: EncodeJson]: EncodeJson[NonEmptyList[A]] =
+    fromFoldable[NonEmptyList, A]
 
 }
