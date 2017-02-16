@@ -1,13 +1,16 @@
 package com.imageintelligence.galahad.argonaut
 
 import java.net.URL
+import java.time.Instant
 
 import argonaut._
 import argonaut.Argonaut._
 import java.util.UUID
 import java.util.concurrent.TimeUnit
+
 import scala.concurrent.duration.Duration
-import scalaz._, Scalaz._
+import scalaz._
+import Scalaz._
 
 object ArgonautHelpers {
 
@@ -19,31 +22,31 @@ object ArgonautHelpers {
     f(_).fold(x => DecodeResult.fail[B](x, history), x => DecodeResult.ok(x))
   }
 
-  implicit def URLCodecJson: CodecJson[URL] =
-    CodecJson(
-      i => i.toString.asJson,
-      i => i.as[String].flatMap(eitherDecoder(
-        i.history,
-        a => \/.fromTryCatchNonFatal(new URL(a)).leftMap(_ => "Could not decode URL")
-      ))
-    )
+  implicit def URLCodecJson: CodecJson[URL] = CodecJson(
+    i => i.toString.asJson,
+    i => i.as[String].flatMap(eitherDecoder(
+      i.history,
+      a => \/.fromTryCatchNonFatal(new URL(a)).leftMap(_ => "Could not decode URL")
+    ))
+  )
 
-  implicit def UUIDCodecJson: CodecJson[UUID] =
-    CodecJson(
-      i => i.toString.asJson,
-      i => i.as[String].flatMap(eitherDecoder(
-        i.history,
-        a => \/.fromTryCatchNonFatal(UUID.fromString(a)).leftMap(_ => "Could not decode UUID")
-      ))
-    )
+  implicit def UUIDCodecJson: CodecJson[UUID] = CodecJson(
+    i => i.toString.asJson,
+    i => i.as[String].flatMap(eitherDecoder(
+      i.history,
+      a => \/.fromTryCatchNonFatal(UUID.fromString(a)).leftMap(_ => "Could not decode UUID")
+    ))
+  )
 
+  implicit def DurationCodecJson: CodecJson[Duration] = CodecJson(
+    i => i.toMillis.asJson,
+    i => i.as[Long].map(Duration.create(_, TimeUnit.MILLISECONDS))
+  )
 
-  implicit def DurationCodecJson: CodecJson[Duration] = {
-    CodecJson(
-      i => i.toMillis.asJson,
-      i => i.as[Long].map(Duration.create(_, TimeUnit.MILLISECONDS))
-    )
-  }
+  implicit def InstantCodecJson: CodecJson[Instant] = CodecJson(
+    i => i.toEpochMilli.asJson,
+    i => i.as[Long].map(Instant.ofEpochMilli)
+  )
 
   implicit def NonEmptyListDecodeJson[A: DecodeJson]: DecodeJson[NonEmptyList[A]] = {
     implicitly[DecodeJson[List[A]]].flatMap(l =>

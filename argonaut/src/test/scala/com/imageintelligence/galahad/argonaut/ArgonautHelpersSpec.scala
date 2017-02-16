@@ -1,6 +1,7 @@
 package com.imageintelligence.galahad.argonaut
 
 import java.net.URL
+import java.time.Instant
 import java.util.UUID
 
 import argonaut._
@@ -32,6 +33,7 @@ class ArgonautHelpersSpec extends PropSpec with Checkers {
     check(encodeDecodeLaw[Duration], MinSuccessful(100))
   }
 
-
-
+  property("Instant encode/decode") {
+    check(encodeDecodeLaw[Instant], MinSuccessful(100))
+  }
 }

@@ -1,6 +1,7 @@
 package com.imageintelligence.galahad.core
 
 import java.net.URL
+import java.time.Instant
 import java.util.UUID
 import java.util.concurrent.TimeUnit
 
@@ -27,7 +28,11 @@ object Generators {
   val genDuration: Gen[Duration] =
     Arbitrary.arbInt.arbitrary.map(i => Duration.create(i.toLong, TimeUnit.MILLISECONDS))
 
+  val genInstant: Gen[Instant] =
+    Arbitrary.arbLong.arbitrary.map(Instant.ofEpochMilli)
+
   implicit val arbURL: Arbitrary[URL] = Arbitrary(genURL)
   implicit val arbDuration: Arbitrary[Duration] = Arbitrary(genDuration)
   implicit val arbUUID: Arbitrary[UUID] = Arbitrary(Gen.uuid)
+  implicit val arbInstant: Arbitrary[Instant] = Arbitrary(genInstant)
 }
