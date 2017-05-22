@@ -7,8 +7,7 @@ A collection of utilities to help make working with Scala easier.
 
 ## Published artifacts:
 
-Available at [Bintray](https://bintray.com/imageintelligence/maven) and built at [TravisCI](https://travis-ci
-.com/ImageIntelligence/galahad)
+Available at [Bintray](https://bintray.com/imageintelligence/maven) and built at [TravisCI](https://travis-ci.com/ImageIntelligence/galahad)
 
 ## Installation
 
@@ -17,8 +16,8 @@ Available at [Bintray](https://bintray.com/imageintelligence/maven) and built at
 Just add this to your build.sbt
 
 ```
-"com.imageintelligence" %% "galahad-core" % "0.0.4"
-"com.imageintelligence" %% "galahad-argonaut" % "0.0.4"
+"com.imageintelligence" %% "galahad-core" % "0.0.11"
+"com.imageintelligence" %% "galahad-argonaut" % "0.0.11"
 ```
 
 ### As a project to work on
@@ -40,7 +39,3 @@ Test
 ```
 sbt test
 ```
-
-### Project Structure
-
-
