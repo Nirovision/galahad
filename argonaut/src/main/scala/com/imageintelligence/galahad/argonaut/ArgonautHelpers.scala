@@ -7,7 +7,7 @@ import argonaut._
 import argonaut.Argonaut._
 import java.util.UUID
 import java.util.concurrent.TimeUnit
-
+import org.scalacheck.{Arbitrary, Prop}
 import scala.concurrent.duration.Duration
 import scalaz._
 import Scalaz._
@@ -51,13 +51,18 @@ object ArgonautHelpers {
   implicit def NonEmptyListDecodeJson[A: DecodeJson]: DecodeJson[NonEmptyList[A]] = {
     implicitly[DecodeJson[List[A]]].flatMap(l =>
       DecodeJson[NonEmptyList[A]](c => std.list.toNel(l) match {
-        case None => DecodeResult.fail("[A]NonEmptyList[A]", c.history)
+        case None => DecodeResult.fail("Could not decode non empty list", c.history)
         case Some(n) => DecodeResult.ok(n)
       })
-    ) setName "[A]NonEmptyList[A]"
+    )
   }
 
   implicit def NonEmptyListEncodeJson[A: EncodeJson]: EncodeJson[NonEmptyList[A]] =
     fromFoldable[NonEmptyList, A]
 
+  def encodeDecodeLaw[A: DecodeJson : EncodeJson : Arbitrary]: Prop = {
+    Prop.forAll { a: A =>
+      CodecJson.codecLaw(CodecJson.derived[A])(a)
+    }
+  }
 }

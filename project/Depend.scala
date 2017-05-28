@@ -11,9 +11,9 @@ object Depend {
   lazy val argonaut = Seq("io.argonaut" %% "argonaut" % argonautVersion)
 
   lazy val scalaTestCheck = Seq(
-    "org.scalatest"   %% "scalatest"                 % "2.2.4",
-    "org.scalacheck"  %% "scalacheck"                % "1.12.1"
-  ).map(_.withSources).map(_ % "test")
+    "org.scalacheck"  %% "scalacheck" % "1.12.5",
+    "org.scalacheck"  %% "scalacheck" % "1.12.5" % "test"
+  ).map(_.withSources)
 
   lazy val depResolvers = Seq(
     "Scalaz Bintray Repo" at "http://dl.bintray.com/scalaz/releases",

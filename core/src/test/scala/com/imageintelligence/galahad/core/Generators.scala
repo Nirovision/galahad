@@ -8,6 +8,8 @@ import java.util.concurrent.TimeUnit
 import org.scalacheck._
 
 import scala.concurrent.duration.Duration
+import scalaz._
+import Scalaz._
 
 
 object Generators {
@@ -25,6 +27,10 @@ object Generators {
     path     <- Gen.listOfN(length, genPathElement)
   } yield new URL(protocol, host, port, path.mkString("/", "/", ""))
 
+  def genNel[A](g: Gen[A]): Gen[NonEmptyList[A]] = {
+    Gen.nonEmptyListOf(g).map(l => NonEmptyList.nel(l.head, l.tail.toIList))
+  }
+
   val genDuration: Gen[Duration] =
     Arbitrary.arbInt.arbitrary.map(i => Duration.create(i.toLong, TimeUnit.MILLISECONDS))
 
@@ -35,4 +41,6 @@ object Generators {
   implicit val arbDuration: Arbitrary[Duration] = Arbitrary(genDuration)
   implicit val arbUUID: Arbitrary[UUID] = Arbitrary(Gen.uuid)
   implicit val arbInstant: Arbitrary[Instant] = Arbitrary(genInstant)
+  implicit val arbNelInt: Arbitrary[NonEmptyList[Int]] = Arbitrary(genNel(Gen.choose(Int.MinValue, Int.MaxValue)))
+  implicit val arbNelString: Arbitrary[NonEmptyList[String]] = Arbitrary(genNel(Gen.alphaStr))
 }

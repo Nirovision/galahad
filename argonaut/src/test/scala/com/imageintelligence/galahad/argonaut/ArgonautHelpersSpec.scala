@@ -5,35 +5,24 @@ import java.time.Instant
 import java.util.UUID
 
 import argonaut._
-import org.scalacheck._
 import ArgonautHelpers._
 import com.imageintelligence.galahad.core.Generators._
-import org.scalatest.PropSpec
-import org.scalatest.prop.Checkers
+import org.scalacheck._
 
 import scala.concurrent.duration.Duration
+import scalaz.NonEmptyList
 
-class ArgonautHelpersSpec extends PropSpec with Checkers {
+class ArgonautHelpersSpec extends Properties("ArgonautHelpers") {
 
-  def encodeDecodeLaw[A: DecodeJson : EncodeJson : Arbitrary]: Prop = {
-    org.scalacheck.Prop.forAll { a: A =>
-      implicitly[DecodeJson[A]].apply(implicitly[EncodeJson[A]].apply(a).hcursor).value exists (_ === a)
-    }
-  }
+  property("URL encode/decode") = encodeDecodeLaw[URL]
 
-  property("URL encode/decode") {
-    check(encodeDecodeLaw[URL], MinSuccessful(100))
-  }
+  property("UUID encode/decode") = encodeDecodeLaw[UUID]
 
-  property("UUID encode/decode") {
-    check(encodeDecodeLaw[UUID], MinSuccessful(100))
-  }
+  property("Duration encode/decode") = encodeDecodeLaw[Duration]
 
-  property("Duration encode/decode") {
-    check(encodeDecodeLaw[Duration], MinSuccessful(100))
-  }
+  property("Instant encode/decode") = encodeDecodeLaw[Instant]
 
-  property("Instant encode/decode") {
-    check(encodeDecodeLaw[Instant], MinSuccessful(100))
-  }
+  property("NonEmptyList[Int] encode/decode") = encodeDecodeLaw[NonEmptyList[Int]]
+
+  property("NonEmptyList[String] encode/decode") = encodeDecodeLaw[NonEmptyList[String]]
 }
