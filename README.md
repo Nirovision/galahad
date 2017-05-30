@@ -1,7 +1,7 @@
 # galahad
 
-[![Build Status](https://travis-ci.org/ImageIntelligence/galahad.svg?branch=master)](https://travis-ci.org/ImageIntelligence/galahad)<Paste>
-[ ![Download](https://api.bintray.com/packages/imageintelligence/maven/galahad-core/images/download.svg) ](https://bintray.com/imageintelligence/maven/galahad-core/_latestVersion)
+[![Build Status](https://travis-ci.org/ImageIntelligence/galahad.svg?branch=master)](https://travis-ci.org/ImageIntelligence/galahad)
+[![Download](https://api.bintray.com/packages/imageintelligence/maven/galahad-core/images/download.svg) ](https://bintray.com/imageintelligence/maven/galahad-core/_latestVersion)
 
 A collection of utilities to help make working with Scala easier.
 
@@ -16,8 +16,8 @@ Available at [Bintray](https://bintray.com/imageintelligence/maven) and built at
 Just add this to your build.sbt
 
 ```
-"com.imageintelligence" %% "galahad-core" % "0.0.11"
-"com.imageintelligence" %% "galahad-argonaut" % "0.0.11"
+"com.imageintelligence" %% "galahad-core" % "1.0.0"
+"com.imageintelligence" %% "galahad-argonaut" % "1.0.0"
 ```
 
 ### As a project to work on
