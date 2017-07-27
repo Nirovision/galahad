@@ -1,4 +1,4 @@
-package com.imageintelligence
+package com.imageintelligence.galahad.core
 
 import scalaz.Monad
 import scalaz.EitherT

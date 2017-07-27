@@ -18,7 +18,7 @@ object Generators {
     length <- Gen.choose(1, 10)
     path   <- Gen.listOfN(length, Gen.alphaLowerChar)
   } yield path.mkString
-  
+
   val genURL: Gen[URL] = for {
     protocol <- Gen.oneOf("http", "https")
     host     <- Gen.identifier
