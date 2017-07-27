@@ -46,7 +46,7 @@ lazy val argonaut = Project(
     libraryDependencies :=
       Depend.scalaz ++
       Depend.argonaut ++
-      Depend.scalaTestCheck
+      Depend.scalacheck
   )
 ).dependsOn(core % "test->test;compile->compile")
 

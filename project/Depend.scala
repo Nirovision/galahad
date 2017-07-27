@@ -10,7 +10,7 @@ object Depend {
 
   lazy val argonaut = Seq("io.argonaut" %% "argonaut" % argonautVersion)
 
-  lazy val scalaTestCheck = Seq(
+  lazy val scalacheck = Seq(
     "org.scalacheck"  %% "scalacheck" % "1.12.5",
     "org.scalacheck"  %% "scalacheck" % "1.12.5" % "test"
   ).map(_.withSources)
