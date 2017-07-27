@@ -33,7 +33,7 @@ lazy val core = Project(
     version := Try(sys.env("LIB_VERSION")).getOrElse("0.0.1"),
     libraryDependencies :=
       Depend.scalaz ++
-      Depend.scalaTestCheck
+      Depend.scalacheck
   )
 )
 
