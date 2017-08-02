@@ -17,4 +17,14 @@ object EitherTHelpers {
       })
     }
   }
+
+  implicit class EitherTObjectPimp(e: EitherT.type) {
+    def rights[F[_]: Monad, E, A](a: A): EitherT[F, E, A] = {
+      EitherT.fromDisjunction[F](a.right)
+    }
+
+    def lefts[F[_]: Monad, E, A](e: E): EitherT[F, E, A] = {
+      EitherT.fromDisjunction[F](e.left)
+    }
+  }
 }
