@@ -22,6 +22,10 @@ object ArgonautHelpers {
     f(_).fold(x => DecodeResult.fail[B](x, history), x => DecodeResult.ok(x))
   }
 
+  def eitherToDecodeResult[A](e: Either[String, A], history: CursorHistory): DecodeResult[A] = {
+    e.fold(x => DecodeResult.fail[A](x, history), x => DecodeResult.ok(x))
+  }
+
   implicit def URLCodecJson: CodecJson[URL] = CodecJson(
     i => i.toString.asJson,
     i => i.as[String].flatMap(eitherDecoder(
