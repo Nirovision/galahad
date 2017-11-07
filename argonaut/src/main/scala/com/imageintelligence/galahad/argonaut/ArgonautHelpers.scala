@@ -7,10 +7,8 @@ import argonaut._
 import argonaut.Argonaut._
 import java.util.UUID
 import java.util.concurrent.TimeUnit
-import org.scalacheck.{Arbitrary, Prop}
 import scala.concurrent.duration.Duration
 import scalaz._
-import Scalaz._
 
 object ArgonautHelpers {
 
@@ -63,10 +61,4 @@ object ArgonautHelpers {
 
   implicit def NonEmptyListEncodeJson[A: EncodeJson]: EncodeJson[NonEmptyList[A]] =
     fromFoldable[NonEmptyList, A]
-
-  def encodeDecodeLaw[A: DecodeJson : EncodeJson : Arbitrary]: Prop = {
-    Prop.forAll { a: A =>
-      CodecJson.codecLaw(CodecJson.derived[A])(a)
-    }
-  }
 }

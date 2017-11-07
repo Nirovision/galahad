@@ -2,10 +2,11 @@ import scala.util.Try
 
 lazy val commonSettings = Seq(
   organization := "com.imageintelligence",
-  scalaVersion := "2.11.8",
+  scalaVersion := "2.12.4",
   resolvers := Depend.depResolvers,
   licenses += ("MIT", url("http://opensource.org/licenses/MIT")),
   bintrayOrganization := Some("imageintelligence"),
+  crossScalaVersions := Seq("2.11.0", "2.12.0"),
   scalacOptions ++= Seq(
     "-deprecation",
     "-encoding", "UTF-8",
@@ -25,29 +26,29 @@ lazy val commonSettings = Seq(
   )
 )
 
-lazy val core = Project(
-  id = "core",
-  base = file("core"),
-  settings = commonSettings ++ Seq (
-    name := "galahad-core",
-    version := Try(sys.env("LIB_VERSION")).getOrElse("0.0.1"),
-    libraryDependencies :=
-      Depend.scalaz ++
-      Depend.scalacheck
+lazy val core =
+  (project in file("core"))
+  .settings(
+    commonSettings,
+    Seq (
+      name := "galahad-core",
+      version := Try(sys.env("LIB_VERSION")).getOrElse("0.0.1"),
+      libraryDependencies :=
+        Depend.scalaz
+    )
   )
-)
 
-lazy val argonaut = Project(
-  id = "argonaut",
-  base = file("argonaut"),
-  settings = commonSettings ++ Seq(
-    name := "galahad-argonaut",
-    version := Try(sys.env("LIB_VERSION")).getOrElse("0.0.1"),
-    libraryDependencies :=
-      Depend.scalaz ++
-      Depend.argonaut ++
-      Depend.scalacheck
-  )
-).dependsOn(core % "test->test;compile->compile")
+lazy val argonaut =
+  (project in file("argonaut"))
+  .settings(
+    commonSettings,
+    Seq (
+      name := "galahad-argonaut",
+      version := Try(sys.env("LIB_VERSION")).getOrElse("0.0.1"),
+      libraryDependencies :=
+        Depend.scalaz ++
+        Depend.argonaut
+    )
+  ).dependsOn(core % "test->test;compile->compile")
 
 lazy val root = (project in file(".")).settings (publish := { }).aggregate(core, argonaut)
