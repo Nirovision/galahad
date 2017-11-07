@@ -6,7 +6,7 @@ lazy val commonSettings = Seq(
   resolvers := Depend.depResolvers,
   licenses += ("MIT", url("http://opensource.org/licenses/MIT")),
   bintrayOrganization := Some("imageintelligence"),
-  crossScalaVersions := Seq("2.11.0", "2.12.0"),
+  crossScalaVersions := Seq("2.11.0"),
   scalacOptions ++= Seq(
     "-deprecation",
     "-encoding", "UTF-8",
