@@ -12,6 +12,7 @@ env:
 
 deploy:
   provider: script
+  skip_cleanup: true
   script: project/publish.sh
   env:
   on:
