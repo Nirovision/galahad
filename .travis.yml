@@ -18,5 +18,4 @@ deploy:
     tags: true
 
 script:
-  - sbt bintrayWhoami
-  - sbt +compile
+  - sbt -Dbintray.user=$BINTRAY_USER -Dbintray.pass=$BINTRAY_PASSWORD +compile
