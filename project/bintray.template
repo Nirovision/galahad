@@ -1,4 +1,0 @@
-realm = Bintray
-host = dl.bintray.com
-user = $BINTRAY_USER
-password = $BINTRAY_PASSWORD
